@@ -15,6 +15,7 @@
 	<description>Api que envia um email.</description>
 	<properties>
 		<java.version>17</java.version>
+		<commons-email.version>1.5</commons-email.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -27,10 +28,18 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>${commons-email.version}</version>
+		</dependency>
+
+		<!-- DEPENDENCIAS PARA TESTES -->
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
