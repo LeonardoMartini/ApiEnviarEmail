@@ -1,3 +1,12 @@
+commons-email:
+  authenticator:
+    usuario: "leonardolmartini@gmail.com"
+    senha: "MyIFGt9q8wsJ2Kkn"
+  host-name: "smtp-relay.sendinblue.com"
+  remetente:
+    email: "leonardolmartini@gmail.com"
+    nome: "Leonardo"
+  smtp-port: 587
 server:
   servlet:
-    context-path: /api-enviar-email
+    context-path: "/api-enviar-email"
