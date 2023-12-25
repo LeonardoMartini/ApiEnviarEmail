@@ -1,7 +1,10 @@
 package com.leonardo.martini.apienviaremail.dto.domain;
 
-public class MensagemErroDomain {
+public interface MensagemErroDomain {
 
-    public static String ENVIAR_EMAIL = "Falha ao enviar email.";
+    String EMAIL_INVALIDO = "Email inválido.";
+    String ENVIAR_EMAIL = "Falha ao enviar email.";
+    String NOME_INVALIDO = "Nome inválido.";
+    String REQUISICAO_NULA = "Requisição não deve ser nula.";
 
 }

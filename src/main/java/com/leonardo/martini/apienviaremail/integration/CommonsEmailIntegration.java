@@ -33,9 +33,9 @@ public class CommonsEmailIntegration implements EnviarEmailIntegration {
 
     @Override
     public void enviar(EnviarEmailRequest request) {
-        log.info("Enviando email.");
-
         SimpleEmail email = construirEmail(request);
+
+        log.info("Enviando email.");
 
         try {
             email.send();
