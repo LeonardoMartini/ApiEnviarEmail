@@ -1,9 +1,7 @@
 package com.leonardo.martini.apienviaremail.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.leonardo.martini.apienviaremail.dto.domain.MensagemSucessoDomain;
 import com.leonardo.martini.apienviaremail.dto.request.EnviarEmailRequest;
-import com.leonardo.martini.apienviaremail.dto.response.EnviarEmailResponse;
 import com.leonardo.martini.apienviaremail.service.EnviarEmailService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,7 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -35,13 +33,12 @@ public class EnviarEmailControllerTest {
     void quandoReceberRequestValidaDeveRetornarSucesso() throws Exception {
         EnviarEmailRequest request = new EnviarEmailRequest("Teste", "teste@teste.com", "Teste");
 
-        when(service.enviar(any())).thenReturn(EnviarEmailResponse.builder().mensagem(MensagemSucessoDomain.ENVIAR_EMAIL).build());
+        doNothing().when(service).enviar(any());
 
         mockMvc.perform(post("")
                         .contentType("application/json")
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
     }
-
 
 }

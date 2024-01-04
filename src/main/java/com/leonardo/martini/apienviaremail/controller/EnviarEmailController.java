@@ -1,22 +1,24 @@
 package com.leonardo.martini.apienviaremail.controller;
 
 import com.leonardo.martini.apienviaremail.dto.request.EnviarEmailRequest;
-import com.leonardo.martini.apienviaremail.dto.response.EnviarEmailResponse;
 import com.leonardo.martini.apienviaremail.service.EnviarEmailService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 public class EnviarEmailController {
 
-    @Autowired
-    private EnviarEmailService service;
+    private final EnviarEmailService service;
 
     @PostMapping
-    public EnviarEmailResponse enviar(@RequestBody EnviarEmailRequest request) {
-        return service.enviar(request);
+    @ResponseStatus(HttpStatus.CREATED)
+    public void enviar(@RequestBody EnviarEmailRequest request) {
+        service.enviar(request);
     }
 
 }
