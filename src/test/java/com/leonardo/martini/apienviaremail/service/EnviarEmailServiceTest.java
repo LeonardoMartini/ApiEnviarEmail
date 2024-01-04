@@ -2,7 +2,6 @@ package com.leonardo.martini.apienviaremail.service;
 
 import com.leonardo.martini.apienviaremail.dto.domain.MensagemErroDomain;
 import com.leonardo.martini.apienviaremail.dto.request.EnviarEmailRequest;
-import com.leonardo.martini.apienviaremail.dto.response.EnviarEmailResponse;
 import com.leonardo.martini.apienviaremail.integration.EnviarEmailIntegration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
@@ -30,12 +28,10 @@ public class EnviarEmailServiceTest {
         EnviarEmailRequest request = EnviarEmailRequest.builder()
                 .nome("Nome Teste")
                 .email("email@teste.com")
+                .assunto("Assunto teste")
                 .build();
 
-        EnviarEmailResponse response = service.enviar(request);
-
-        assertNotNull(response);
-        assertNotNull(response.getMensagem());
+        service.enviar(request);
 
         verify(integration).enviar(any());
     }

@@ -1,6 +1,7 @@
 package com.leonardo.martini.apienviaremail.integration;
 
 import com.leonardo.martini.apienviaremail.dto.domain.MensagemErroDomain;
+import com.leonardo.martini.apienviaremail.dto.exception.ErroInternoException;
 import com.leonardo.martini.apienviaremail.dto.request.EnviarEmailRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.mail.DefaultAuthenticator;
@@ -40,7 +41,7 @@ public class CommonsEmailIntegration implements EnviarEmailIntegration {
         try {
             email.send();
         } catch (EmailException exception) {
-            throw falhaEnviarEmail(request, exception);
+            falhaEnviarEmail(request, exception);
         }
 
         log.info("Email enviado com sucesso.");
@@ -61,16 +62,16 @@ public class CommonsEmailIntegration implements EnviarEmailIntegration {
             email.addTo(request.getEmail(), request.getNome());
             email.setMsg(request.getAssunto());
         } catch (EmailException exception) {
-            throw falhaEnviarEmail(request, exception);
+            falhaEnviarEmail(request, exception);
         }
 
         return email;
     }
 
-    private RuntimeException falhaEnviarEmail(EnviarEmailRequest request, EmailException exception) {
+    private void falhaEnviarEmail(EnviarEmailRequest request, EmailException exception) {
         log.error("Falha ao enviar email: {}", request, exception);
 
-        return new RuntimeException(MensagemErroDomain.ENVIAR_EMAIL);
+        throw new ErroInternoException(MensagemErroDomain.ENVIAR_EMAIL);
     }
 
 }
